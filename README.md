@@ -98,3 +98,7 @@ spotify-library-tools/
 The `.env` file contains sensitive credentials and is excluded from version control via `.gitignore`.
 Never commit your actual `CLIENT_SECRET` to a repository.
 If you accidentally expose it, revoke it immediately in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+
+## License
+
+MIT
