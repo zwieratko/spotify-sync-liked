@@ -9,3 +9,6 @@ __pycache__/
 # Spotipy OAuth token cache
 .cache
 .cache-*
+
+# macOS
+.DS_Store
