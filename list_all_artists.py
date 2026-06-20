@@ -20,13 +20,13 @@ def main():
 
     def extract_artists(items):
         """Extract the primary artist name from each track item."""
-        return [item['track']['artists'][0]['name'] for item in items]
+        return [item["track"]["artists"][0]["name"] for item in items]
 
-    all_artists.extend(extract_artists(results['items']))
+    all_artists.extend(extract_artists(results["items"]))
 
-    while results['next']:
+    while results["next"]:
         results = sp.next(results)
-        all_artists.extend(extract_artists(results['items']))
+        all_artists.extend(extract_artists(results["items"]))
 
     # Count occurrences and sort alphabetically (case-insensitive)
     artist_counts = Counter(all_artists)
