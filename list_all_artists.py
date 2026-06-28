@@ -32,14 +32,17 @@ def main():
     artist_counts = Counter(all_artists)
     sorted_artists = sorted(artist_counts.items(), key=lambda x: x[0].lower())
 
+    name_width = max(len(artist) for artist, _ in sorted_artists)
+    count_width = len("Track count")
+
     print(f"\n--- ALPHABETICAL ARTIST LIST ({len(sorted_artists)} artists) ---")
-    print(f"{'Artist':<30} | {'Track count':<15}")
-    print("-" * 48)
+    print(f"{'Artist':<{name_width}} | {'Track count':<{count_width}}")
+    print("-" * (name_width + count_width + 3))
 
     for artist, count in sorted_artists:
-        print(f"{artist:<30} | {count:<15}")
+        print(f"{artist:<{name_width}} | {count:<{count_width}}")
 
-    print("-" * 48)
+    print("-" * (name_width + count_width + 3))
     print(f"Total tracks in library: {len(all_artists)}")
 
 
