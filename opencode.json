@@ -1,10 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "command": {
-    "init-agents": {
-      "description": "Create or update AGENTS.md with full project context",
-      "template": "Read all the source files in this project. Then, update the AGENTS.md file in the project's root directory if it already exists, or create it if it doesn't. The file should contain the following:\n- The project's purpose and high-level description. What the project does.\n- An overview of the project structure, the key files and their roles.\n- How to run the project and its dependencies (runtime, package manager, environment variables, etc.).\n- The coding conventions observed in the existing code.\n- Known limitations or TODOs found in the code or comments.\nImportant: Language rules that apply to all future work in this project:\n- You may communicate with me in Slovak when I write in Slovak.\n- All code must be in English without exception: variable names, function names, class names, comments, docstrings, log messages, user-facing output, CLI prompts, error messages, everything.\n- If you ever suggest a name or write any code, it must be in English regardless of what language we are discussing it in.\nImportant: Maintenance rules that apply to all future work in this project:\n- The AGENTS.md file must be kept up to date.\n- Before ending any session where you made changes to the project structure, modules, dependencies, or how the project is run — you must update the relevant sections of AGENTS.md. This is not optional."
-    },
     "lint": {
       "description": "Run ruff linter and report issues",
       "template": "Run the ruff linter on the entire project using: uv tool run ruff check .\nReport all findings with file paths and line numbers. If there are no issues, confirm the project is clean."
@@ -13,13 +9,17 @@
       "description": "Check code formatting with ruff",
       "template": "Check code formatting using: uv tool run ruff format . --check\nReport which files would be reformatted. If everything is already formatted correctly, confirm it."
     },
+    "type-check": {
+      "description": "Run ty type checker",
+      "template": "Run the type checker using: uv tool run --with spotipy --with python-dotenv ty check .\nReport all type errors with file paths and line numbers. If there are no issues, confirm the project passes type checking."
+    },
     "run": {
       "description": "Run sync_spotify.py and evaluate output",
-      "template": "Run the main project script using: uv run sync_spotify.py\nWait for it to finish, then evaluate the output — check for errors, exceptions, or unexpected results. Summarize what happened and whether the run was successful.\n\nThen repeat the same with the other project scripts using:\n- uv run analyze_liked_songs.py\n- uv run list_all_artists.py\nWait for it to finish, then evaluate the output — check for errors, exceptions, or unexpected results. Summarize what happened and whether the run was successful."
+      "template": "Run the main project script using: uv run sync_spotify.py\nWait for it to finish, then evaluate the output — check for errors, exceptions, or unexpected results. Summarize what happened and whether the run was successful.\n\nThen repeat the same with the other project scripts:\n- uv run analyze_liked_songs.py\n- uv run list_all_artists.py\nFor each: wait for it to finish, evaluate the output, and summarize the result."
     },
     "check-all": {
-      "description": "Full project check: lint + format + run",
-      "template": "Perform a full project check in this exact order:\n1. Run linter: uv tool run ruff check .\n2. Check formatting: uv tool run ruff format . --check\n3. Run the main script: uv run sync_spotify.py\n\nAfter each step report the result. If lint or format check fails, report the issues but continue to the next step. After all three steps provide a final summary of the overall project health."
+      "description": "Full project check: lint + format + type + run",
+      "template": "Perform a full project check in this exact order:\n1. Lint: uv tool run ruff check .\n2. Format: uv tool run ruff format . --check\n3. Types: uv tool run --with spotipy --with python-dotenv ty check .\n4. Run: uv run sync_spotify.py\n5. Run: uv run analyze_liked_songs.py\n6. Run: uv run list_all_artists.py\n\nReport the result after each step. If a check fails, report the issues and continue to the next step. After all six steps, provide a final summary of the overall project health."
     }
   }
 }
