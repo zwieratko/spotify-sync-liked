@@ -48,6 +48,7 @@ def main():
     # Logic: a track is considered a duplicate if it shares the same title and primary artist.
     seen_tracks = {}  # (title, artist) -> count
     duplicates = []
+    reported = set()
 
     for item in all_items:
         name = item["track"]["name"].lower().strip()
@@ -55,7 +56,8 @@ def main():
         key = (name, artist)
 
         if key in seen_tracks:
-            if key not in duplicates:
+            if key not in reported:
+                reported.add(key)
                 duplicates.append(key)
             seen_tracks[key] += 1
         else:

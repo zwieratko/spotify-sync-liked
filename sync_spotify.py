@@ -26,12 +26,12 @@ def main():
 
     # --- Step 2: Fetch tracks already in the public playlist ---
     print("--- Checking the public playlist ---")
-    playlist_results = sp.playlist_items(playlist_id)
-    existing_ids = [item["track"]["id"] for item in playlist_results["items"]]
+    playlist_results = sp.playlist_items(playlist_id, limit=100)
+    existing_ids = {item["track"]["id"] for item in playlist_results["items"]}
 
     while playlist_results["next"]:
         playlist_results = sp.next(playlist_results)
-        existing_ids.extend([item["track"]["id"] for item in playlist_results["items"]])
+        existing_ids.update(item["track"]["id"] for item in playlist_results["items"])
 
     # --- Step 3: Filter — only add tracks not already in the playlist ---
     new_tracks = [t_id for t_id in liked_songs if t_id not in existing_ids]
