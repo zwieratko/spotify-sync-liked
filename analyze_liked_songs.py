@@ -1,7 +1,7 @@
 # /// script
 # dependencies = [
-#   "spotipy",
-#   "python-dotenv",
+#   "spotipy>=2.26,<3",
+#   "python-dotenv>=1.2,<2",
 # ]
 # ///
 
