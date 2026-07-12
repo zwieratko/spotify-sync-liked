@@ -82,7 +82,7 @@ uv run list_all_artists.py
 ## Project structure
 
 ```
-spotify-library-tools/
+spotify-sync-liked/
 ├── config.py               # Shared auth and config helpers
 ├── sync_spotify.py
 ├── analyze_liked_songs.py
