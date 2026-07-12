@@ -5,6 +5,7 @@
 __pycache__/
 *.pyc
 .cache/
+.ruff_cache/
 
 # Spotipy OAuth token cache
 .cache
